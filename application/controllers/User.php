@@ -44,7 +44,7 @@ class User extends Public_Controller {
         }
         // set form validation rules
         $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
-        $this->form_validation->set_rules('username', 'Username', 'required|trim|max_length[256]');
+        $this->form_validation->set_rules('mobile', 'Mobile', 'required|trim|min_length[8]|max_length[15]|numeric');
         $this->form_validation->set_rules('password', 'Password', 'required|trim|max_length[72]|callback__check_login');
         if ($this->form_validation->run() == TRUE) {
             if ($this->session->userdata('redirect')) {
@@ -89,6 +89,7 @@ class User extends Public_Controller {
         // validators
         $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
         $this->form_validation->set_rules('username', 'Username', 'required|trim|min_length[5]|max_length[30]|callback__check_username');
+        $this->form_validation->set_rules('mobile', 'Mobile', 'required|trim|min_length[8]|max_length[15]|numeric');
         $this->form_validation->set_rules('first_name', 'First Name', 'required|trim|min_length[2]|max_length[32]');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required|trim|min_length[2]|max_length[32]');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|max_length[256]|valid_email|callback__check_email');
@@ -264,7 +265,7 @@ class User extends Public_Controller {
         $ok_to_login = $this->UsersModel->login_attempts();
         if ($ok_to_login) {
 
-            $login = $this->UsersModel->login($this->input->post('username', TRUE), $password);
+            $login = $this->UsersModel->mobileLogin($this->input->post('mobile', TRUE), $password);
 
             if ($login && $login !='not-active') {
                 $this->session->set_userdata('logged_in', $login);

@@ -186,6 +186,7 @@ class UsersModel extends CI_Model {
             first_name,
             last_name,
             email,
+            mobile,
             image,
             language,
             is_admin,
@@ -201,6 +202,7 @@ class UsersModel extends CI_Model {
             " . $this->db->escape($data['first_name']) . ",
             " . $this->db->escape($data['last_name']) . ",
             " . $this->db->escape($data['email']) . ",
+            " . $this->db->escape($data['mobile']) . ",
             " . $this->db->escape($profileimg) . ",
             " . $this->db->escape($data['language']) . ",
             '0',
@@ -268,6 +270,7 @@ class UsersModel extends CI_Model {
             first_name = " . $this->db->escape($data['first_name']) . ",
             last_name = " . $this->db->escape($data['last_name']) . ",
             email = " . $this->db->escape($data['email']) . ",
+            mobile = " . $this->db->escape($data['mobile']) . ",
             image = " . $this->db->escape($editimg) . ",
             language = " . $this->db->escape($data['language']) . ",
             is_admin = " . $this->db->escape($is_admin) . ",
@@ -314,6 +317,7 @@ class UsersModel extends CI_Model {
             first_name = " . $this->db->escape($data['first_name']) . ",
             last_name = " . $this->db->escape($data['last_name']) . ",
             email = " . $this->db->escape($data['email']) . ",
+            mobile = " . $this->db->escape($data['mobile']) . ",
             language = " . $this->db->escape($data['language']) . ",
             updated = '" . date('Y-m-d H:i:s') . "'
             WHERE id = " . $this->db->escape($user_id) . "
@@ -382,6 +386,61 @@ class UsersModel extends CI_Model {
             WHERE (username = " . $this->db->escape($username) . "
             OR email = " . $this->db->escape($username) . ")
             
+            AND deleted = '0'
+            LIMIT 1
+            ";
+            // AND status = '1'
+            $query = $this->db->query($sql);
+
+            if ($query->num_rows()) 
+            {
+                $results = $query->row_array();
+                $salted_password = hash('sha512', $password . $results['salt']);
+                if ($results['password'] == $salted_password) {
+                    unset($results['password']);
+                    unset($results['salt']);
+                    if($results['status']==1)
+                    { 
+                        return $results; 
+                    }
+                    else
+                    {
+                        return 'not-active';
+                    }
+                }
+            }
+        }
+        return FALSE;
+    }
+
+    /**
+     * Check for valid login credentials
+     *
+     * @param  string $username
+     * @param  string $password
+     * @return array|boolean
+     */
+    function mobileLogin($mobile = NULL, $password = NULL) {
+        if ($mobile && $password) { 
+            $sql = "
+            SELECT
+            id,
+            username,
+            password,
+            salt,
+            first_name,
+            last_name,
+            email,
+            mobile,
+            image,
+            language,
+            is_admin,
+            status,
+            role,
+            created,
+            updated
+            FROM {$this->_db}
+            WHERE (mobile = " . $this->db->escape($mobile). ")
             AND deleted = '0'
             LIMIT 1
             ";

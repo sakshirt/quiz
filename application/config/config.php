@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = "http://localhost/Scripts/gitlab/quiz";
+$config['base_url'] = "http://localhost/quiz/";
 
 /*
 |--------------------------------------------------------------------------
@@ -535,8 +535,8 @@ $config['proxy_ips'] = '';
 */
 spl_autoload_register(function($class)
 {
-	if (strpos($class, 'CI_') !== 0)
-	{
-		@include_once(APPPATH . 'core/' . $class . '.php');
-	}
+    if (strpos($class, 'CI_') !== 0)
+    {
+        @include_once(APPPATH . 'core/' . $class . '.php');
+    }
 });

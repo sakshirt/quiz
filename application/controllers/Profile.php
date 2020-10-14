@@ -25,7 +25,8 @@ class Profile extends Private_Controller {
         // validators
 
         $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
-        $this->form_validation->set_rules('username', 'User Name', 'required|trim|min_length[5]|max_length[30]|callback__check_username');
+        $this->form_validation->set_rules('username', 'User Name', 'trim|min_length[5]|max_length[30]|callback__check_username');
+        $this->form_validation->set_rules('mobile', 'Mobile', 'required|trim|min_length[8]|max_length[15]|numeric|callback__check_mobile');
         $this->form_validation->set_rules('first_name','First Name', 'required|trim|min_length[2]|max_length[32]');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required|trim|min_length[2]|max_length[32]');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|max_length[128]|valid_email|callback__check_email');
@@ -119,6 +120,21 @@ class Profile extends Private_Controller {
             return FALSE;
         } else {
             return $username;
+        }
+    }
+
+    /**
+     * Make sure mobile is available
+     *
+     * @param  string $mobile
+     * @return int|boolean
+     */
+    function _check_mobile($mobile) {
+        if (trim($mobile) != $this->user['mobile'] && $this->UsersModel->mobile_exists($mobile)) {
+            $this->form_validation->set_message('_check_mobile', sprintf(lang('mobile_exists'), $mobile));
+            return FALSE;
+        } else {
+            return $mobile;
         }
     }
 

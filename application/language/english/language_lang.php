@@ -180,6 +180,7 @@ $lang['footer_text'] = "Footer Text";
 $lang['free'] = "Free";
 $lang['front_email'] = "Email";
 $lang['front_first_name'] = "First Name";
+$lang['mobile'] = "Mobile";
 $lang['front_forgot'] = "Forgot Password";
 $lang['front_lang_token'] = "Front Token";
 $lang['front_language'] = "Language";

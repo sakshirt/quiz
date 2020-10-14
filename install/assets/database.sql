@@ -3102,7 +3102,19 @@ VALUES
 	(6173,4,'admin_backup_now','Backup Now','admin','2020-09-18 22:07:31','2020-09-18 22:07:31'),
 	(6174,5,'admin_backup_now','Backup Now','admin','2020-09-18 22:07:31','2020-09-18 22:07:31'),
 	(6175,6,'admin_backup_now','Backup Now','admin','2020-09-18 22:07:31','2020-09-18 22:07:31'),
-	(6176,7,'admin_backup_now','Backup Now','admin','2020-09-18 22:07:31','2020-09-18 22:07:31');
+	(6176,7,'admin_backup_now','Backup Now','admin','2020-09-18 22:07:31','2020-09-18 22:07:31'),
+	(6177,1,'mobile','Mobile','front','2020-08-17 12:06:24','2020-08-17 17:36:24'),
+	(6178,2,'mobile','Móvil','front','2020-09-03 14:18:45','2020-09-03 19:48:45'),
+	(6179,4,'mobile','Mobiltelefon','front','2020-09-03 14:20:09','2020-09-03 19:50:09'),
+	(6180,5,'mobile','मोबाइल','front','2020-09-03 14:21:10','2020-09-03 19:51:10'),
+	(6181,6,'mobile','التليفون المحمول','front','2020-09-03 14:21:10','2020-09-03 19:51:10'),
+	(6182,7,'mobile','Mobile','front','2020-09-03 14:21:10','2020-09-03 19:51:10'),
+	(6183,1,'mobile_exists','The mobile number <strong>%s</strong> already exists!','front','2020-08-13 10:22:52','2020-08-13 15:52:52'),
+	(6184,2,'mobile_exists','¡El número de móvil <strong>% s </strong> ya existe!','front','2020-09-03 14:18:45','2020-09-03 19:48:45'),
+	(6185,4,'mobile_exists','Die Mobiltelefonnummer <strong>% s </ strong> existiert bereits!','front','2020-09-03 14:20:09','2020-09-03 19:50:09'),
+	(6186,5,'mobile_exists','उपयोगकर्ता मोबाइल नंबर <strong>% s </ strong> पहले से मौजूद है!','front','2020-09-03 14:21:10','2020-09-03 19:51:10'),
+	(6187,6,'mobile_exists','رقم الهاتف المحمول <strong>٪ s </strong> موجود بالفعل!','front','2020-09-03 14:22:32','2020-09-03 19:52:32'),
+	(6188,7,'mobile_exists','numéro de portable <strong>% s </strong> existe déjà!','front','2020-09-03 14:23:31','2020-09-03 19:53:31');
 
 /*!40000 ALTER TABLE `lang_token` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -5055,6 +5067,7 @@ CREATE TABLE `users` (
   `token` varchar(256) DEFAULT NULL,
   `auth_id` varchar(255) DEFAULT NULL,
   `login_from` varchar(255) DEFAULT NULL,
+  `mobile` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB;
@@ -5062,10 +5075,10 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 
-INSERT INTO `users` (`id`, `username`, `password`, `salt`, `first_name`, `last_name`, `email`, `image`, `language`, `is_admin`, `role`, `status`, `deleted`, `validation_code`, `created`, `updated`, `token`, `auth_id`, `login_from`)
+INSERT INTO `users` (`id`, `username`, `password`, `salt`, `first_name`, `last_name`, `email`, `image`, `language`, `is_admin`, `role`, `status`, `deleted`, `validation_code`, `created`, `updated`, `token`, `auth_id`, `login_from`, `mobile`)
 VALUES
-	(1,'admin','258c45e11141e375544f80d2a604e7984204e4900f259f0201c011d39831ac06f55251d15b3686eb9961178d11056c2e640edfdb9e3867c32069398d9595f2d1','22654929c10b1c98a6afd877ec2492154d5441ec8b0036abc6005c6bce2e2e33e03f3b603568a2ed97c5ef6039c9b772450042282658427a829e8c7dfa7496fc','Site','Administrator','admin@admin.com','','English','1','user','1','0',NULL,'2013-01-01 00:00:00','2020-09-18 22:04:18',NULL,NULL,NULL),
-	(2,'johndoe','4e8ece39c9905fe6989022a7747d2c67d90582cdf483d762905f026b3f2328dbc019acf59f77a57472228933c33429de859210a3c6b2976234501462994cf73c','a876126be616f492fa9ff8fb554eadffb8e43ed9faef8e1070c2508d76c57b1613899ceb97972f7959c4c05617ce36e25ba63787a8bd3f183680863c687a7c12','John','Doe','john@doe.com','mufc16.jpg','english','0','user','1','0',NULL,'2013-01-01 00:00:00','2019-12-10 13:52:06',NULL,NULL,NULL);
+	(1,'admin','258c45e11141e375544f80d2a604e7984204e4900f259f0201c011d39831ac06f55251d15b3686eb9961178d11056c2e640edfdb9e3867c32069398d9595f2d1','22654929c10b1c98a6afd877ec2492154d5441ec8b0036abc6005c6bce2e2e33e03f3b603568a2ed97c5ef6039c9b772450042282658427a829e8c7dfa7496fc','Site','Administrator','admin@admin.com','','English','1','user','1','0',NULL,'2013-01-01 00:00:00','2020-09-18 22:04:18',NULL,NULL,NULL,1234567899),
+	(2,'johndoe','4e8ece39c9905fe6989022a7747d2c67d90582cdf483d762905f026b3f2328dbc019acf59f77a57472228933c33429de859210a3c6b2976234501462994cf73c','a876126be616f492fa9ff8fb554eadffb8e43ed9faef8e1070c2508d76c57b1613899ceb97972f7959c4c05617ce36e25ba63787a8bd3f183680863c687a7c12','John','Doe','john@doe.com','mufc16.jpg','english','0','user','1','0',NULL,'2013-01-01 00:00:00','2019-12-10 13:52:06',NULL,NULL,NULL,1234567898);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

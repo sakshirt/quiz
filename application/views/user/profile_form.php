@@ -14,9 +14,17 @@
                   <div class="row">
                      <div class="form-group col-12<?php echo form_error('username') ? ' has-error' : ''; ?>">
                         <?php echo form_label(lang('username'), 'username', array('class'=>'control-label')); ?>
-                        <span class="required"> * </span>
                         <?php echo form_input(array('name'=>'username', 'id'=>'username','value'=>set_value('username', (isset($user['username']) ? $user['username'] : '')), 'class'=>'form-control')); ?>
                         <span class="small text-danger"> <?php echo strip_tags(form_error('username')); ?> </span>
+                     </div>
+                  </div>
+                  <?php // username ?>
+                  <div class="row">
+                     <div class="form-group col-12<?php echo form_error('mobile') ? ' has-error' : ''; ?>">
+                        <?php echo form_label(lang('mobile'), 'mobile', array('class'=>'control-label')); ?>
+                        <span class="required"> * </span>
+                        <?php echo form_input(array('name'=>'mobile', 'id'=>'mobile','value'=>set_value('mobile', (isset($user['mobile']) ? $user['mobile'] : '')), 'class'=>'form-control')); ?>
+                        <span class="small text-danger"> <?php echo strip_tags(form_error('mobile')); ?> </span>
                      </div>
                   </div>
                   <div class="row">

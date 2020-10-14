@@ -10,9 +10,9 @@
                <div class="card-body">
                   <?php echo form_open('', array('class'=>'form-signin formlogin')); ?>
                   <div class="form-group">
-                     <?php echo form_label(lang('user_username_email'), 'username_email'); ?> 
-                     <?php echo form_input(array('name'=>'username', 'id'=>'username', 'class'=>'form-control', 'placeholder'=>lang('user_username_email'), 'maxlength'=>256)); ?>
-                     <span class="small text-danger"> <?php echo strip_tags(form_error('username_email')); ?> </span>
+                     <?php echo form_label(lang('mobile'), 'username_email'); ?> 
+                     <?php echo form_input(array('name'=>'mobile', 'id'=>'mobile', 'class'=>'form-control', 'placeholder'=>lang('mobile'), 'maxlength'=>256)); ?>
+                     <span class="small text-danger"> <?php echo strip_tags(form_error('mobile')); ?> </span>
                   </div>
                   <div class="form-group">
                      <div class="d-block">
