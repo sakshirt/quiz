@@ -34,6 +34,9 @@
                 $populateData = $this->input->post('title') ? $this->input->post('title') : (isset($question_data['title']) ? $question_data['title'] :  '' );
               ?>
 
+              <?php
+                $choice_images = json_decode($question_data['choice_images']);
+              ?>
               <input type="text" name="title" id="title" class="form-control" value="<?php echo xss_clean($populateData);?>">
               <span class="small form-error"> <?php echo strip_tags(form_error('title')); ?> </span>
             </div>
@@ -90,7 +93,7 @@
           <div class="col-12">
             <div class="after_ticket_section row">
 
-              <div class="col-md-7">
+              <div class="col-md-5">
                 <div class="form-group <?php echo form_error('choices[]') && empty($first_choies) ? ' has-error' : ''; ?> choice_block">
                   <label class="control-label"> <?php echo lang('question_choices'); ?>  <span class="text-danger">*</span></label>
                   <input type="text" name="choices[0]" id='choices' class="form-control choices" value="<?php echo xss_clean($first_choies); ?>">
@@ -120,7 +123,25 @@
                 </div>
               </div>
 
-              <div class="col-md-3">
+              <div class="col-3 question_img_block">
+                <div class="form-group <?php echo form_error('image') ? ' has-error' : ''; ?>">
+                  <?php echo  form_label(lang('admin_upload_image'), 'image'); ?>
+                  <?php $choiceImage = isset($choice_images[0]) ? $choice_images[0] : ''; ?>
+                  <input type="File" name="choice_image_0" id="choice_image" class="form-control">
+                  <span class="small form-error"> <?php echo strip_tags(form_error('image')); ?> </span>
+                  <?php 
+                    if($choiceImage)
+                    {
+                  ?>
+                    <img src='<?php echo base_url("assets/images/choices/$choiceImage"); ?>' class="question_image popup">
+
+                  <?php
+                    }
+                  ?>
+                </div>
+              </div>
+
+              <div class="col-md-2">
                 <div class="form-group mt-4 pt-2">
                   <button class="btn btn-primary  btn-block add-more" data-index="<?php echo xss_clean($no_of_option); ?>" type="button">
                     <?php echo lang('admin_add_more'); ?></button>
@@ -151,7 +172,7 @@
 
                     <div class="copied_ticket_section col-12">
                       <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-5">
                           <div class="form-group <?php echo form_error('choices[]') && empty($choices_value) ? ' has-error' : ''; ?>">
                             <label class="control-label">Options <span class="text-danger">*</span></label>
                             <input type="text" name="choices[<?php echo xss_clean($i); ?>]" id="choices" class="form-control choices" value="<?php echo xss_clean($choices_value); ?>">
@@ -168,8 +189,24 @@
                             </label>
                           </div>
                         </div>
+                        <div class="col-3 question_img_block">
+                          <div class="form-group <?php echo form_error('image') ? ' has-error' : ''; ?>">
+                            <?php echo  form_label(lang('admin_upload_image'), 'image'); ?>
+                            <?php $choiceImage = isset($choice_images[$i]) ? $choice_images[$i] : ''; ?>
+                            <input type="File" name="choice_image_<?php echo xss_clean($i); ?>" id="choice_image" class="form-control">
+                            <span class="small form-error"> <?php echo strip_tags(form_error('image')); ?> </span>
+                            <?php 
+                              if($choiceImage)
+                              {
+                            ?>
+                              <img src='<?php echo base_url("assets/images/choices/$choiceImage"); ?>' class="question_image popup">
 
-                        <div class="col-md-3">
+                            <?php
+                              }
+                            ?>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
                           <div class="form-group mt-4 pt-2 ">
                             <button class="btn btn-danger  btn-block remove_block_btn<?php echo xss_clean($update); ?>" type="button">Remove</button>
                           </div>
@@ -201,7 +238,7 @@
       <section class="copy_ticket_section d-none">
         <div class="copied_ticket_section col-12">
           <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-5">
               <div class="form-group choice_block">
                 <label class="control-label"><?php echo lang('question_choices'); ?> <span class="text-danger">*</span></label>
                 <input type="text" name="choices[]" id='choices' class="form-control choices checkkk">
@@ -218,8 +255,14 @@
                 </label>
               </div>
             </div>
-
-            <div class="col-md-3">
+            <div class="col-3">
+                <div class="form-group <?php echo form_error('image') ? ' has-error' : ''; ?>">
+                  <?php echo  form_label(lang('admin_upload_image'), 'image'); ?>
+                  <input type="File" name="choice_image[]" id="choice_image" class="form-control">
+                  <span class="small form-error"> <?php echo strip_tags(form_error('image')); ?> </span>
+                </div>
+            </div>
+            <div class="col-md-2">
               <div class="form-group mt-4 pt-2 ">
                 <button class="btn btn-danger  btn-block remove_block_btn<?php echo xss_clean($update); ?>" type="button"><?php echo lang('admin_record_remove'); ?></button>
               </div>

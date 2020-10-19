@@ -196,15 +196,15 @@ class UsersModel extends CI_Model {
             created,
             updated
             ) VALUES (
-            " . $this->db->escape($data['username']) . ",
+            " . $this->db->escape($data['username'] ?? $data['mobile']) . ",
             " . $this->db->escape($password) . ",
             " . $this->db->escape($salt) . ",
             " . $this->db->escape($data['first_name']) . ",
             " . $this->db->escape($data['last_name']) . ",
-            " . $this->db->escape($data['email']) . ",
+            " . $this->db->escape($data['email'] ?? "") . ",
             " . $this->db->escape($data['mobile']) . ",
             " . $this->db->escape($profileimg) . ",
-            " . $this->db->escape($data['language']) . ",
+            " . $this->db->escape($data['language'] ?? 1) . ",
             '0',
             '0',
             '0',
@@ -673,6 +673,26 @@ class UsersModel extends CI_Model {
         SELECT id
         FROM {$this->_db}
         WHERE email = " . $this->db->escape($email) . "
+        LIMIT 1
+        ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows()) {
+            return TRUE;
+        }
+        return FALSE;
+    }
+
+    /**
+     * Check to see if an mobile already exists
+     *
+     * @param  string $mobile
+     * @return boolean
+     */
+    function mobile_exists($mobile) {
+        $sql = "
+        SELECT id
+        FROM {$this->_db}
+        WHERE mobile = " . $this->db->escape($mobile) . "
         LIMIT 1
         ";
         $query = $this->db->query($sql);

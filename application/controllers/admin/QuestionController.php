@@ -48,6 +48,7 @@ class QuestionController extends Admin_Controller {
         $this->form_validation->set_rules('choices[]', 'Choices', 'required|trim');
 
         $choices_array = $this->input->post('choices') ? $this->input->post('choices') : array();
+        $choice_images = array();
         $arr_is_correct = $this->input->post('is_correct') ? $this->input->post('is_correct') : array();
         $count_of_option = count($choices_array);
         $no_of_option = $count_of_option > 0 ? $count_of_option - 1 : 0;
@@ -62,8 +63,7 @@ class QuestionController extends Admin_Controller {
             $user_id = isset($this->user['id']) ? $this->user['id'] : 0;
             $is_multiple = $this->input->post('is_multiple',TRUE);
             $is_multiple = $is_multiple ? 1 : 0;
-            $question_image = NULL; 
-
+            $question_image = NULL;
             if(isset($_FILES['image']['name']) && $_FILES['image']['name'])
             {
                 $question_image_upload = $this->do_upload_image('image');
@@ -78,7 +78,23 @@ class QuestionController extends Admin_Controller {
                     $question_image = $question_image_upload['upload_data']['file_name'];
                 }
             }
+            for($i = 0; $i <= $no_of_option; $i++) {
+                $choice_images[$i] = NULL;
+                if(isset($_FILES["choice_image_$i"]['name']) && $_FILES["choice_image_$i"]['name'])
+                {
+                    $name = time().$_FILES["choice_image_$i"]['name'];
+                    $choiceImage = $this->do_upload_choise_image($name, "choice_image_$i");
 
+                    if($choiceImage['status'] == 'error')
+                    {
+                        $this->session->set_flashdata('error', lang('invalid_file_formate'));
+                    }
+                    else
+                    {
+                        $choice_images[$i] = $choiceImage['upload_data']['file_name'];
+                    }
+                }
+            }
             $correct_choice = array();
 
             foreach ($choices_array as $key => $option_value) 
@@ -94,6 +110,7 @@ class QuestionController extends Admin_Controller {
             $question_content['title'] = $this->input->post('title',TRUE);
             $question_content['is_multiple'] = $is_multiple;
             $question_content['choices'] = json_encode($choices_array);
+            $question_content['choice_images'] = json_encode($choice_images);
             $question_content['correct_choice'] = json_encode($correct_choice);
             $question_content['image'] = $question_image;
             $question_content['solution'] = $this->input->post('solution',TRUE);
@@ -145,10 +162,9 @@ class QuestionController extends Admin_Controller {
 
         $this->form_validation->set_rules('title', 'Title', 'required|trim'.$title_unique);
         $this->form_validation->set_rules('choices[]', 'Choices', 'required|trim');
-  
+        $choice_images = $question_data->choice_images;
         $choices_array = $this->input->post('choices') ? $this->input->post('choices') : array();
         $arr_is_correct = $this->input->post('is_correct') ? $this->input->post('is_correct') : array();
-
         if(empty($choices_array))
         {
             $choices_array = json_decode($question_data->choices);
@@ -196,12 +212,29 @@ class QuestionController extends Admin_Controller {
                     $correct_choice[$key] = $option_value;
                 }
             }
+            for($i = 0; $i <= $no_of_option; $i++) {
+                if(isset($_FILES["choice_image_$i"]['name']) && $_FILES["choice_image_$i"]['name'])
+                {
+                    $choice_images[$i] = NULL;
+                    $name = time().$_FILES["choice_image_$i"]['name'];
+                    $choiceImage = $this->do_upload_choise_image($name, "choice_image_$i");
 
+                    if($choiceImage['status'] == 'error')
+                    {
+                        $this->session->set_flashdata('error', lang('invalid_file_formate'));
+                    }
+                    else
+                    {
+                        $choice_images[$i] = $choiceImage['upload_data']['file_name'];
+                    }
+                }
+            }
             $question_content['quiz_id'] = $quiz_id;
             $question_content['title'] = $this->input->post('title',TRUE);
             $question_content['is_multiple'] = $is_multiple;
             $question_content['choices'] = json_encode($choices_array);
             $question_content['correct_choice'] = json_encode($correct_choice);
+            $question_content['choice_images'] = json_encode($choice_images);
             $question_content['solution'] = $this->input->post('solution',TRUE);
             $question_content['updated'] =  date('Y-m-d H:i:s');
 
@@ -255,6 +288,7 @@ class QuestionController extends Admin_Controller {
         $question_content['title']          = $question_data->title.'-copy '.$count;
         $question_content['is_multiple']    =  $question_data->is_multiple;
         $question_content['choices']        = $question_data->choices;
+        $question_content['choice_images']        = $question_data->choice_images;
         $question_content['correct_choice'] =  $question_data->correct_choice;
         $question_content['image']          =  NULL;
         $question_content['added']          =  date('Y-m-d H:i:s');
@@ -434,6 +468,33 @@ class QuestionController extends Admin_Controller {
         return $respons;
     }
 
+    public function do_upload_choise_image($name, $filename)
+    {
+        $new_name = time().$name;
+        $config['upload_path']          = "./assets/images/choices";
+        $config['allowed_types']        = 'jpg|png|jpeg';
+        $config['max_size']             = 100;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+        $config['file_name'] = $new_name;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload($filename))
+        {
+            $respons = array(   'status' => 'error',
+                                'error' => $this->upload->display_errors()
+                            );
+        }
+        else
+        {
+            $respons = array('status' => 'success',
+                             'upload_data' => $this->upload->data(),
+                            );
+        }
+
+        return $respons;
+    }
 
     public function translate_questions($question_id)
     {
@@ -526,9 +587,10 @@ class QuestionController extends Admin_Controller {
 
         $translated_data_array =  $translated_post_data ?  $translated_post_data : $translated_data_array;
         if(empty($translated_data_array))
-        { 
+        {
             $choices_array = json_decode($question_data->choices);
             $correct_choice_array = json_decode($question_data->correct_choice);
+            $choice_images = json_decode($question_data->choice_images);
             foreach ($languages as $language) 
             {
                 $translated_data_array[$language->id]['title'] = $question_data->title;

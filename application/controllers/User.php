@@ -88,23 +88,21 @@ class User extends Public_Controller {
         
         // validators
         $this->form_validation->set_error_delimiters($this->config->item('error_delimeter_left'), $this->config->item('error_delimeter_right'));
-        $this->form_validation->set_rules('username', 'Username', 'required|trim|min_length[5]|max_length[30]|callback__check_username');
-        $this->form_validation->set_rules('mobile', 'Mobile', 'required|trim|min_length[8]|max_length[15]|numeric');
+        $this->form_validation->set_rules('username', 'Username', 'trim|min_length[5]|max_length[30]|callback__check_username');
+        $this->form_validation->set_rules('mobile', 'Mobile', 'required|trim|min_length[8]|max_length[15]|numeric|callback__check_mobile');
         $this->form_validation->set_rules('first_name', 'First Name', 'required|trim|min_length[2]|max_length[32]');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required|trim|min_length[2]|max_length[32]');
-        $this->form_validation->set_rules('email', 'Email', 'required|trim|max_length[256]|valid_email|callback__check_email');
-        $this->form_validation->set_rules('language', 'Language', 'required|trim');
+        $this->form_validation->set_rules('email', 'Email', 'trim|max_length[256]|valid_email|callback__check_email');
         $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[5]');
         $this->form_validation->set_rules('password_repeat', 'Repeat Password', 'required|trim|matches[password]');
         if ($this->form_validation->run() == TRUE) {
             // save the changes 
             $validation_code = $this->UsersModel->create_profile($this->input->post());
-
             if ($validation_code) {
                 $this->session->language = 'English';
 
                 // build the validation URL
-                $encrypted_email = sha1($this->input->post('email', TRUE));
+                $encrypted_email = sha1($this->input->post('mobile', TRUE));
                 $validation_url = base_url('user/validate') . "?e={$encrypted_email}&c={$validation_code}";
                 // build email
                 $email_msg = '';
@@ -293,7 +291,7 @@ class User extends Public_Controller {
      * @return int|boolean
      */
     function _check_username($username) {
-        if ($this->UsersModel->username_exists($username)) {
+        if (!empty($username) && $this->UsersModel->username_exists($username)) {
             $this->form_validation->set_message('_check_username', sprintf(lang('username_exists'), $username));
             return FALSE;
         } else {
@@ -308,11 +306,26 @@ class User extends Public_Controller {
      * @return int|boolean
      */
     function _check_email($email) {
-        if ($this->UsersModel->email_exists($email)) {
+        if (!empty($email) && $this->UsersModel->email_exists($email)) {
             $this->form_validation->set_message('_check_email', sprintf(lang('email_exists'), $email));
             return FALSE;
         } else {
             return $email;
+        }
+    }
+
+    /**
+     * Make sure mobile is available
+     *
+     * @param  string $mobile
+     * @return int|boolean
+     */
+    function _check_mobile($mobile) {
+        if ($this->UsersModel->mobile_exists($mobile)) {
+            $this->form_validation->set_message('_check_mobile', sprintf(lang('mobile_exists'), $mobile));
+            return FALSE;
+        } else {
+            return $mobile;
         }
     }
 
@@ -323,7 +336,7 @@ class User extends Public_Controller {
      * @return int|boolean
      */
     function _check_email_exists($email) {
-        if (!$this->UsersModel->email_exists($email)) {
+        if (!empty($email) && !$this->UsersModel->email_exists($email)) {
             $this->form_validation->set_message('_check_email_exists', sprintf(lang('user_error_email_not_exists'), $email));
             return FALSE;
         } else {

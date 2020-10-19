@@ -10,20 +10,12 @@
                </div>
                <div class="card-body">
                   <?php echo form_open_multipart('', array('role'=>'form')); ?>
-                  <?php // username ?>
-                  <div class="row">
-                     <div class="form-group col-12<?php echo form_error('username') ? ' has-error' : ''; ?>">
-                        <?php echo form_label(lang('username'), 'username', array('class'=>'control-label')); ?>
-                        <?php echo form_input(array('name'=>'username', 'id'=>'username','value'=>set_value('username', (isset($user['username']) ? $user['username'] : '')), 'class'=>'form-control')); ?>
-                        <span class="small text-danger"> <?php echo strip_tags(form_error('username')); ?> </span>
-                     </div>
-                  </div>
-                  <?php // username ?>
+                  <?php // mobile ?>
                   <div class="row">
                      <div class="form-group col-12<?php echo form_error('mobile') ? ' has-error' : ''; ?>">
                         <?php echo form_label(lang('mobile'), 'mobile', array('class'=>'control-label')); ?>
                         <span class="required"> * </span>
-                        <?php echo form_input(array('name'=>'mobile', 'id'=>'mobile','value'=>set_value('mobile', (isset($user['mobile']) ? $user['mobile'] : '')), 'class'=>'form-control')); ?>
+                        <?php echo form_input(array('name'=>'mobile', 'id'=>'mobile','placeholder'=>lang('mobile_placeholder'), 'value'=>set_value('mobile', (isset($user['mobile']) ? $user['mobile'] : '')), 'class'=>'form-control')); ?>
                         <span class="small text-danger"> <?php echo strip_tags(form_error('mobile')); ?> </span>
                      </div>
                   </div>
@@ -32,41 +24,33 @@
                      <div class="form-group col-6<?php echo form_error('first_name') ? ' has-error' : ''; ?>">
                         <?php echo form_label(lang('front_first_name'), 'first_name', array('class'=>'control-label')); ?>
                         <span class="required">*</span>
-                        <?php echo form_input(array('name'=>'first_name','id'=>'first_name', 'value'=>set_value('first_name', (isset($user['first_name']) ? $user['first_name'] : '')), 'class'=>'form-control')); ?>
+                        <?php echo form_input(array('name'=>'first_name','id'=>'first_name', 'placeholder'=>lang('front_first_name_placeholder'), 'value'=>set_value('first_name', (isset($user['first_name']) ? $user['first_name'] : '')), 'class'=>'form-control')); ?>
                         <span class="small text-danger"> <?php echo strip_tags(form_error('first_name')); ?> </span>
                      </div>
                      <?php // last name ?>
                      <div class="form-group col-6<?php echo form_error('last_name') ? ' has-error' : ''; ?>">
                         <?php echo form_label(lang('front_last_name'), 'last_name', array('class'=>'control-label')); ?>
                         <span class="required">*</span>
-                        <?php echo form_input(array('name'=>'last_name','id'=>'last_name', 'value'=>set_value('last_name', (isset($user['last_name']) ? $user['last_name'] : '')), 'class'=>'form-control')); ?>
+                        <?php echo form_input(array('name'=>'last_name','id'=>'last_name', 'placeholder'=>lang('front_last_name_placeholder'), 'value'=>set_value('last_name', (isset($user['last_name']) ? $user['last_name'] : '')), 'class'=>'form-control')); ?>
                         <span class="small text-danger"> <?php echo strip_tags(form_error('last_name')); ?> </span>
                      </div>
                   </div>
                   <div class="row">
                      <?php // email ?>
-                     <div class="form-group col-6<?php echo form_error('email') ? ' has-error' : ''; ?>">
+                     <div class="form-group col-12<?php echo form_error('email') ? ' has-error' : ''; ?>">
                         <?php echo form_label(lang('front_email'), 'email', array('class'=>'control-label')); ?>
-                        <span class="required">*</span>
-                        <?php echo form_input(array('name'=>'email', 'value'=>set_value('email', (isset($user['email']) ? $user['email'] : '')), 'class'=>'form-control', 'type'=>'email')); ?>
+                        <?php echo form_input(array('name'=>'email', 'placeholder'=>lang('front_email_placeholder'), 'value'=>set_value('email', (isset($user['email']) ? $user['email'] : '')), 'class'=>'form-control', 'type'=>'email')); ?>
                         <span class="small text-danger"> <?php echo strip_tags(form_error('email')); ?> </span>
-                     </div>
-                     <?php // language ?>
-                     <div class="form-group col-6<?php echo form_error('language') ? ' has-error' : ''; ?>">
-                        <?php echo form_label(lang('front_language'), 'language', array('class'=>'control-label')); ?>
-                        <span class="required">*</span>
-                        <?php echo form_dropdown('language', $this->languages, (isset($user['language']) ? $user['language'] : $this->config->item('language')), 'id="language" class="form-control"'); ?>
-                        <span class="small text-danger"> <?php echo strip_tags(form_error('language')); ?> </span>
                      </div>
                   </div>
                   <div class="row">
                      <?php // password ?>
                      <div class="form-group col-6<?php echo form_error('password') ? ' has-error' : ''; ?>">
-                        <?php echo form_label(lang('password'), 'password', array('class'=>'control-label')); ?>
+                        <?php echo form_label(lang('craete_password'), 'password', array('class'=>'control-label')); ?>
                         <?php if ($password_required) : ?>
                            <span class="required">* </span>
                         <?php endif; ?>
-                        <?php echo form_password(array('name'=>'password', 'value'=>'', 'class'=>'form-control', 'autocomplete'=>'off')); ?>
+                        <?php echo form_password(array('name'=>'password', 'value'=>'',  'placeholder'=>lang('password_placeholder'), 'class'=>'form-control', 'autocomplete'=>'off')); ?>
                         <span class="small text-danger"> <?php echo strip_tags(form_error('password')); ?> </span>
                      </div>
                      <?php // password repeat ?>
@@ -75,7 +59,7 @@
                         <?php if ($password_required) : ?>
                            <span class="required">* </span>
                         <?php endif; ?>
-                        <?php echo form_password(array('name'=>'password_repeat', 'value'=>'', 'class'=>'form-control', 'autocomplete'=>'off')); ?>
+                        <?php echo form_password(array('name'=>'password_repeat', 'value'=>'', 'placeholder'=>lang('front_password_repeat_placeholder'), 'class'=>'form-control', 'autocomplete'=>'off')); ?>
                         <span class="small text-danger"> <?php echo strip_tags(form_error('password_repeat')); ?> </span>
                      </div>
                      <?php if ( ! $password_required) : ?>
@@ -83,12 +67,6 @@
                            <span class="help-block text-warning"><?php echo lang('help_passwords'); ?></span>
                         </div>
                      <?php endif; ?>
-                  </div>
-                  <div class="row">
-                     <div class="form-group col-12<?php echo form_error('password_repeat') ? ' has-error' : ''; ?>">
-                        <?php echo form_label(lang('front_upload_image'), 'user_image', array('class'=>'control-label')); ?>
-                        <?php echo form_upload(array('name'=>'user_image','class'=>'form-control'));?>
-                     </div>
                   </div>
                   <?php // buttons ?>
                   <div class="row ">
