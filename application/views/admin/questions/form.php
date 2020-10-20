@@ -37,7 +37,8 @@
               <?php
                 $choice_images = json_decode($question_data['choice_images']);
               ?>
-              <input type="text" name="title" id="title" class="form-control" value="<?php echo xss_clean($populateData);?>">
+              <!-- <input type="text" name="title" id="title" class="form-control" value="<?php echo xss_clean($populateData);?>"> -->
+              <textarea type="text" name="title" id="title" class="form-control editor" value="<?php echo xss_clean($populateData);?>"></textarea>
               <span class="small form-error"> <?php echo strip_tags(form_error('title')); ?> </span>
             </div>
           </div>
