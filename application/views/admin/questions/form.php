@@ -26,22 +26,7 @@
         <?php echo form_open_multipart('', array('role'=>'form','novalidate'=>'novalidate')); ?>
         <div class="row"> 
 
-          <div class="col-4">
-            <div class="form-group <?php echo form_error('title') ? ' has-error' : ''; ?>">
-              <?php echo  form_label(lang('admin_title'), 'title'); ?> 
-              <span class="required">*</span>
-              <?php 
-                $populateData = $this->input->post('title') ? $this->input->post('title') : (isset($question_data['title']) ? $question_data['title'] :  '' );
-              ?>
-
-              <?php
-                $choice_images = json_decode($question_data['choice_images']);
-              ?>
-              <!-- <input type="text" name="title" id="title" class="form-control" value="<?php echo xss_clean($populateData);?>"> -->
-              <textarea name="title" id="title" class="form-control editor"><?php echo xss_clean($populateData);?></textarea>
-              <span class="small form-error"> <?php echo strip_tags(form_error('title')); ?> </span>
-            </div>
-          </div>
+          
 
           <div class="col-4">
             <div class="question_img_block form-group <?php echo form_error('image') ? ' has-error' : ''; ?>">
