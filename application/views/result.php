@@ -323,7 +323,9 @@
                 <?php if($question_data['solution']) { ?>
                   <li>
                     <label class="result">
-                      <?php echo lang('question_solution'); ?>: <span class="option "> <?php echo htmlspecialchars($question_data['solution']); ?></span>
+                      <?php echo lang('question_solution'); ?>: <span class="option "> 
+                        <?php echo strip_tags($question_data['solution']); ?>
+                      </span>
                     </label>
                   </li>
                 <?php } ?>
