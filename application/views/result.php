@@ -117,7 +117,7 @@
               $l++;
               ?>
               <tr class="row100 body botder-bottom">
-                <td class="cell100 result-column1 py-5"><?php echo sprintf("%02d", $l); ?>. <?php echo htmlspecialchars(($question_data['question'])); ?>
+                <td class="cell100 result-column1 py-5"><?php echo sprintf("%02d", $l); ?>. <?php echo html_entity_decode(($question_data['question'])); ?>
                 </td>
                 <td class="cell100 result-column2"> 
                   <?php 
@@ -225,7 +225,7 @@
         <div class="modal-body">
           <div class="left_content">
             <ul>
-              <strong> <?php echo lang('question'); ?>: &nbsp;</strong><?php echo htmlspecialchars($question_data['question']); ?>
+              <strong> <?php echo lang('question'); ?>: &nbsp;</strong><?php echo html_entity_decode($question_data['question']); ?>
               <ul class="result-exam-question">
                 <?php 
                   $choices_arr = json_decode($question_data['choices']);
@@ -324,7 +324,7 @@
                   <li>
                     <label class="result">
                       <?php echo lang('question_solution'); ?>: <span class="option "> 
-                        <?php echo strip_tags($question_data['solution']); ?>
+                        <?php echo html_entity_decode($question_data['solution']); ?>
                       </span>
                     </label>
                   </li>

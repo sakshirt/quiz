@@ -17,3 +17,6 @@ application/logs/*
 /vendor/
 
 assets/
+
+application/config/database.php
+application/config/config.php

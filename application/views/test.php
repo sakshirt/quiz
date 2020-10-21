@@ -52,15 +52,14 @@
             <h3 class="card-title">
               <p class="font-weight-bold"><?php echo lang('question_no'); ?> <?php echo xss_clean($question_id); ?>.</p>
               <br />
-              <p>
+              <div class="title-block">
                 <?php 
                   $translate_question_title = get_translated_column_value($lang_id,'questions',$question_data['id'],'title');
                   $translate_question_title = $translate_question_title ? $translate_question_title : $question_data['title'];
 
-                  // echo $translate_question_title; 
-                  echo nl2br($translate_question_title); 
+                    echo html_entity_decode($translate_question_title);
                   ?>      
-              </p>  
+              </div> 
             </h3>
           </div>
 
