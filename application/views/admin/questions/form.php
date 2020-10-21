@@ -46,7 +46,7 @@
               <?php 
                 $populateData = isset($question_data['image']) ? $question_data['image'] :  '';
               ?>
-              <input type="File" name="image" id="image" class="form-control">
+              <input type="File" name="image" id="imageupload" class="form-control">
               <span class="small form-error"> <?php echo strip_tags(form_error('image')); ?> </span>
               <?php 
                 if($populateData)
@@ -79,7 +79,7 @@
                 $populateData = $this->input->post('solution') ? $this->input->post('solution') : (isset($question_data['solution']) ? $question_data['solution'] :  '' );
 
               ?>
-              <textarea name="solution" id="p_desc" class="form-control editor" rows="5" ><?php echo xss_clean($populateData);?></textarea>
+              <textarea name="solution" id="p_desc" class="form-control" rows="5" ><?php echo xss_clean($populateData);?></textarea>
               <span class="small form-error"> <?php echo strip_tags(form_error('solution')); ?> </span>
             </div>
           </div>

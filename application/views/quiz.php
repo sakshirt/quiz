@@ -10,7 +10,7 @@
         $category_image = $category_img_dir.$category_image;
         ?>
 
-      <div class="col-md-4 col-xl-4 col-sm-6" > 
+      <div class="col-md-4 col-xl-4 col-sm-6" >
         <div class="grid">
 
           <figure class="effect-ming">

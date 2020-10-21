@@ -284,6 +284,32 @@
       parent_div.remove();
     });
 
-    
+    //summernote
+    $("#p_desc").summernote({
+      height: 200,
+      callbacks :
+      {
+        onImageUpload: function(files, editor, welEditable) {
+          let el = this;
+          let data = new FormData();
+          data.append("file", files[0]);
+          data.append("path", "quiz");
+          data.append("csrf_test_name", csrf_Hash);
+          $.ajax({
+            data: data,
+            type: "POST",
+            url: BASE_URL + "admin/quiz/dropzone-file",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+              response = JSON.parse(response);
+              $(el).summernote('editor.insertImage', BASE_URL+"assets/images/quiz/"+response.name);
+            }
+          });
+        }
+      }
+    });
+
   });
 })(jQuery);
