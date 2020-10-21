@@ -77,7 +77,11 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
+<<<<<<< Updated upstream
 	'password' => '',
+=======
+	'password' => 'vikas',
+>>>>>>> Stashed changes
 	'database' => 'quiz',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
