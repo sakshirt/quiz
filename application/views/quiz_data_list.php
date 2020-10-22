@@ -59,8 +59,13 @@ if($quiz_list_data)
         $quiz_user_name = $quiz_array->first_name.' '.$quiz_array->last_name;
         $quiz_user_name = strlen($quiz_user_name) > 20 ? substr($quiz_user_name,0,20)."..." : $quiz_user_name;
         
+        
+        if($quiz_array->enable == 1)
+        {
+            $list = 1;
         ?>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"> 
+
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"> 
             <div class="card card-bundle" data-turbolinks="false"> 
                 <div class="thumbnail"> 
                     <span class="maskk gradient-defaultt <?php echo xss_clean($gradients[mt_rand(0,7)]); ?>"> </span> 
@@ -165,13 +170,28 @@ if($quiz_list_data)
                         </a>    
                         <a href="<?php echo xss_clean(base_url('quiz-detail/'.$quiz_id)); ?>" class="btn btn-success w-100 mt-4"><?php echo xss_clean($quiz_title); ?></a>
                     </div> 
-        </div>
-            <?php 
+            </div>
+        
+        <?php 
+        }
+        else if ($quiz_array->enable == 0 && $list!=1)
+        {
+            $list = 0;
+        }
     } 
 }
+  
+
 else 
 {
     ?>
     <div class="col-12 text-center text-danger"> <?php echo lang('no_quiz_found'); ?></div>
     <?php 
-} ?>      
+}       
+
+if($list==0)
+{
+    ?>
+    <div class="col-12 text-center text-danger"> <?php echo lang('no_quiz_found'); ?></div>
+    <?php
+}?>

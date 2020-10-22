@@ -70,6 +70,8 @@ class QuizController extends Admin_Controller {
             $is_random_option = $is_random_option ? 1 : 0;
             $is_paid = $this->input->post('price',TRUE) > 0 ? 1 : 0;
             $is_registered = $this->input->post('is_registered',TRUE) ? 1 : 0;
+
+            $enable = $this->input->post('enable',TRUE) ? 1 : 0;
             
 
             $quiz_content = array();
@@ -87,6 +89,9 @@ class QuizController extends Admin_Controller {
             $quiz_content['is_random'] = $is_random;
             $quiz_content['is_random_option'] = $is_random_option;
             $quiz_content['is_registered'] = $is_registered;
+
+            $quiz_content['enable'] = $enable;
+
             $quiz_content['attempt'] = $this->input->post('quiz_attempt',TRUE);
             $quiz_content['is_paid'] = $is_paid;
             $quiz_content['deleted'] = 0;
@@ -184,6 +189,8 @@ class QuizController extends Admin_Controller {
             $is_paid = $this->input->post('price',TRUE) > 0 ? 1 : 0;
             $is_registered = $this->input->post('is_registered',TRUE) ? 1 : 0;
 
+            $enable = $this->input->post('enable',TRUE) ? 1 : 0;
+
             $quiz_featured_image = $this->input->post('featured_image') ?  $this->input->post('featured_image',TRUE) : array();
             $featured_image = array_merge($last_featured_image,$quiz_featured_image);
 
@@ -202,6 +209,9 @@ class QuizController extends Admin_Controller {
             $quiz_content['is_random'] = $is_random;
             $quiz_content['is_random_option'] = $is_random_option;
             $quiz_content['is_registered'] = $is_registered;
+
+            $quiz_content['enable'] = $enable;
+
             $quiz_content['attempt'] = $this->input->post('quiz_attempt',TRUE);    
             $quiz_content['is_paid'] = $is_paid;
             $quiz_content['updated'] =  date('Y-m-d H:i:s');
