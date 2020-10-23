@@ -4851,6 +4851,7 @@ CREATE TABLE `quizes` (
   `deleted` tinyint(4) DEFAULT NULL,
   `is_registered` tinyint(4) DEFAULT NULL,
   `attempt` tinyint(4) DEFAULT NULL,
+  `enable` tinyint(4) DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 

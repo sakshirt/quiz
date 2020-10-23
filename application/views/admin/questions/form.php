@@ -20,54 +20,33 @@
 
       <?php
     }?>
-<<<<<<< Updated upstream
             <?php
                 $choice_images = json_decode($question_data['choice_images']);
               ?>
-=======
-
->>>>>>> Stashed changes
 
     <div class="col-12">      
         <?php echo form_open_multipart('', array('role'=>'form','novalidate'=>'novalidate')); ?>
         <div class="row"> 
 
-<<<<<<< Updated upstream
           <div class="col-12">
-=======
-          <div class="col-4">
->>>>>>> Stashed changes
             <div class="form-group <?php echo form_error('title') ? ' has-error' : ''; ?>">
               <?php echo  form_label(lang('admin_title'), 'title'); ?> 
               <span class="required">*</span>
               <?php 
                 $populateData = $this->input->post('title') ? $this->input->post('title') : (isset($question_data['title']) ? $question_data['title'] :  '' );
               ?>
-<<<<<<< Updated upstream
               <textarea name="title" id="title" class="form-control editor" rows="5" ><?php echo xss_clean($populateData);?></textarea>
-=======
-
-              <?php
-                $choice_images = json_decode($question_data['choice_images']);
-              ?>
-              <!-- <input type="text" name="title" id="title" class="form-control" value="<?php echo xss_clean($populateData);?>"> -->
-              <textarea type="text" name="title" id="title" class="form-control editor" value="<?php echo xss_clean($populateData);?>"></textarea>
->>>>>>> Stashed changes
               <span class="small form-error"> <?php echo strip_tags(form_error('title')); ?> </span>
             </div>
           </div>
 
-<<<<<<< Updated upstream
           <div class="col-6">
-=======
-          <div class="col-4">
->>>>>>> Stashed changes
             <div class="question_img_block form-group <?php echo form_error('image') ? ' has-error' : ''; ?>">
               <?php echo  form_label(lang('admin_upload_image'), 'image'); ?>
               <?php 
                 $populateData = isset($question_data['image']) ? $question_data['image'] :  '';
               ?>
-              <input type="File" name="image" id="imageupload" class="form-control">
+              <input type="File" name="image" id="image" class="form-control">
               <span class="small form-error"> <?php echo strip_tags(form_error('image')); ?> </span>
               <?php 
                 if($populateData)
@@ -84,11 +63,7 @@
           <?php 
             $populateData = $this->input->post('is_multiple') == 1 ? 'checked' : (isset($question_data['is_multiple']) && $question_data['is_multiple'] == 1 ? 'checked' :  '' );
           ?>
-<<<<<<< Updated upstream
           <div class="col-6">
-=======
-          <div class="col-4">
->>>>>>> Stashed changes
             <label for="status" ><?php echo lang('multiple_choies'); ?> </label>
             <div class="form-control pt-1">
               <input name="is_multiple" class="is_multiple" type="checkbox" <?php echo xss_clean($populateData); ?> data-toggle="toggle" data-size="sm">
@@ -104,7 +79,7 @@
                 $populateData = $this->input->post('solution') ? $this->input->post('solution') : (isset($question_data['solution']) ? $question_data['solution'] :  '' );
 
               ?>
-              <textarea name="solution" id="p_desc" class="form-control" rows="5" ><?php echo xss_clean($populateData);?></textarea>
+              <textarea name="solution" id="p_desc" class="form-control editor" rows="5" ><?php echo xss_clean($populateData);?></textarea>
               <span class="small form-error"> <?php echo strip_tags(form_error('solution')); ?> </span>
             </div>
           </div>

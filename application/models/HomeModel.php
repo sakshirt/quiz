@@ -51,6 +51,7 @@ class HomeModel extends CI_Model {
         ->join('category', 'category.id = quizes.category_id')
         ->where('quizes.number_questions <= (select count(id) from questions where questions.quiz_id = quizes.id)')
         ->where('category.id', $category_id)
+        ->where('quizes.enable', 1)
         ->limit($pro_per_page, $page)
         ->order_by($filter_by, "desc")
         ->get('quizes')

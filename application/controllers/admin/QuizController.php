@@ -599,8 +599,4 @@ class QuizController extends Admin_Controller {
         $data['content'] = $this->load->view('admin/quiz/translate_quiz', $content_data, TRUE);
         $this->load->view($this->template, $data);
     }
-
-    function upload_image() {
-        
-    }
 }

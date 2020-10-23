@@ -105,7 +105,7 @@
 		            $populateData = $this->input->post('leader_board') == 1 ? 'checked' : (isset($quiz_data['leader_board']) && $quiz_data['leader_board'] == 1 ? 'checked' :  '' );
 		          ?>
 
-		          <div class="col-2">
+		          <div class="col-3">
 		            <div class="form-group togle_button">
 		              <?php echo  form_label(lang('display_on_leaderboard'), 'leader_board'); ?>
 		              <label class="custom-switch form-control">
@@ -134,11 +134,26 @@
 		            $populateData = $this->input->post('is_random_option') == 1 ? 'checked' : (isset($quiz_data['is_random_option']) && $quiz_data['is_random_option'] == 1 ? 'checked' :  '' );
 		          ?>
 
-		          <div class="col-2">
+		          <div class="col-3">
 		            <div class="form-group togle_button">
 		              <?php echo  form_label(lang('is_random_option'), 'is_random'); ?>
 		              <label class="custom-switch form-control">
 		                <input type="checkbox" name="is_random_option" value="1" <?php echo xss_clean($populateData); ?> class="custom-switch-input is_random_option"  data-size="sm">
+		                <span class="custom-switch-indicator"></span>
+		              </label>
+		            </div>
+		          </div>
+				  
+				  <?php 
+					$populateData = $this->input->post('enable') == 1 ? 'checked' : (isset($quiz_data['enable']) && $quiz_data['enable'] == 1 ? 'checked' :  '' );
+		            $d_none = $populateData == 'checked' ? ' ' : 'd-none';
+		          ?>
+
+		          <div class="col-2">
+		            <div class="form-group togle_button">
+		              <?php echo  form_label(lang('enable'), 'is_random'); ?>
+		              <label class="custom-switch form-control">
+		                <input type="checkbox" name="enable" value="1" <?php echo xss_clean($populateData); ?> class="custom-switch-input enable"  data-size="sm">
 		                <span class="custom-switch-indicator"></span>
 		              </label>
 		            </div>
@@ -154,21 +169,6 @@
 		              <?php echo  form_label(lang('is_registered'), 'is_random'); ?>
 		              <label class="custom-switch form-control">
 		                <input type="checkbox" name="is_registered" value="1" <?php echo xss_clean($populateData); ?> class="custom-switch-input is_registered"  data-size="sm">
-		                <span class="custom-switch-indicator"></span>
-		              </label>
-		            </div>
-		          </div>
-
-				  <?php 
-					$populateData = $this->input->post('enable') == 1 ? 'checked' : (isset($quiz_data['enable']) && $quiz_data['enable'] == 1 ? 'checked' :  '' );
-		            $d_none = $populateData == 'checked' ? ' ' : 'd-none';
-		          ?>
-
-		          <div class="col-2">
-		            <div class="form-group togle_button">
-		              <?php echo  form_label(lang('enable'), 'is_random'); ?>
-		              <label class="custom-switch form-control">
-		                <input type="checkbox" name="enable" value="1" <?php echo xss_clean($populateData); ?> class="custom-switch-input enable"  data-size="sm">
 		                <span class="custom-switch-indicator"></span>
 		              </label>
 		            </div>
