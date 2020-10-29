@@ -25,6 +25,7 @@ class HomeModel extends CI_Model {
 
         return $this->db->select("quizes.*,(select count(id) from questions where questions.quiz_id = quizes.id) as total_question, (select first_name from users where users.id = quizes.user_id) as first_name , (select last_name from users where users.id = quizes.user_id) as last_name, (SELECT count(id) FROM quiz_count where quiz_id = quizes.id) as total_view,(SELECT id FROM quiz_like where quiz_id = quizes.id AND user_id = '".$user_id."') as like_id,(SELECT count(id) FROM quiz_like where quiz_id = quizes.id) as total_like")
         ->where('quizes.number_questions <= (select count(id) from questions where questions.quiz_id = quizes.id)')
+        ->where('quizes.enable', 1)
         ->order_by($order, 'desc')
         ->limit($limit)
         ->get('quizes')

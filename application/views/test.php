@@ -93,8 +93,7 @@
                 $p = 0;
                 
                 foreach ($question_choies as $key =>  $question_choice) 
-                { 
-                  $choice_images = json_decode($question_data['choice_images']);
+                {
                   $p++;              
                   $q_answer = isset($question_data['answer'])  ?  $question_data['answer'] : array();
                   foreach ($q_answer as  $value) 
@@ -110,21 +109,11 @@
               ?>
 
                   <label class="selectgroup-item btn-block">
-                    <input <?php echo xss_clean($checked) ;?> type="<?php echo xss_clean($is_multiple); ?>" name="answer[]" value="<?php echo htmlspecialchars(xss_clean($question_choice)); ?>" class="selectgroup-input answer_input" >
+                    <input <?php echo xss_clean($checked) ;?> type="<?php echo xss_clean($is_multiple); ?>" name="answer[]" value="<?php echo html_entity_decode(xss_clean($question_choice)); ?>" class="selectgroup-input answer_input" >
 
                     <div class="selectgroup-button <?php echo $is_multiple_border;?>">
                       <?php echo nl2br(($translate_question_choies_data[$key])); ?>
                     </div>
-                    <?php
-                    if(isset($choice_images[$key]) && !empty($choice_images[$key]))
-                    {
-                      ?>
-                        <div class="questions_img">
-                          <img src="<?php echo base_url('assets/images/choices/').$choice_images[$key]; ?>" class="image">
-                        </div>
-                      <?php
-                    }
-                    ?>
                   </label>
               <?php 
                   $checked = '';               

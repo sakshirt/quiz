@@ -245,14 +245,18 @@
         "name",
         "is_correct[" + add_next + "]"
       );
+      let choiceId = "choices-"+ add_next;
       $(".copy_ticket_section .choice_block .choices").attr(
-        "name",
-        "choices[" + add_next + "]"
+       { 
+         "name": "choices[" + add_next + "]",
+         "id" : choiceId
+      }
       );
 
       var html = "";
       html = $(".copy_ticket_section").html();
       $(".after_ticket_section").append(html);
+      renderSummerNote(`#${choiceId}`, 60);
     });
 
     $(document).on("click", ".remove_block_btn", function () {
@@ -285,15 +289,20 @@
     });
 
     //summernote
-    $("#p_desc").summernote({
-      height: 200,
+    renderSummerNote("#p_desc");
+    renderSummerNote(".choices-init", 60);
+  });
+  
+  function renderSummerNote(ele, height = 200) {
+    $(ele).summernote({
+      height: height,
       callbacks :
       {
         onImageUpload: function(files, editor, welEditable) {
           let el = this;
           let data = new FormData();
           data.append("file", files[0]);
-          data.append("path", "quiz");
+          data.append("path", "choices");
           data.append("csrf_test_name", csrf_Hash);
           $.ajax({
             data: data,
@@ -309,7 +318,6 @@
           });
         }
       }
-    });
-
-  });
+    })
+  }
 })(jQuery);

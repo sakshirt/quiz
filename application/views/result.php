@@ -127,7 +127,7 @@
                     foreach ($given_answer_array as $given_answer) 
                     {
                       ?>
-                        <li><?php echo htmlspecialchars(xss_clean($given_answer)); ?></li>
+                        <li><?php echo html_entity_decode(xss_clean($given_answer)); ?></li>
                       <?php
                     }
                   }
@@ -145,7 +145,7 @@
                     foreach ($given_correct_choice as $correct_choice) 
                     {
                       ?>
-                        <li><?php echo htmlspecialchars($correct_choice); ?></li>
+                        <li><?php echo html_entity_decode($correct_choice); ?></li>
                       <?php
                     }
                   }
@@ -254,7 +254,7 @@
                       ?>
                         <div class="custom-control custom-checkbox right_answer">
                           <input type="checkbox" class="custom-control-input" id="question_<?php echo xss_clean($question_data['id']); ?>" <?php echo xss_clean($checked); ?> >
-                          <label class="custom-control-label <?php echo xss_clean($text_color); ?>" for="question_<?php echo (xss_clean($question_data['id'])); ?>"> <?php echo htmlspecialchars($choices_val); ?></label>
+                          <label class="custom-control-label <?php echo xss_clean($text_color); ?>" for="question_<?php echo (xss_clean($question_data['id'])); ?>"> <?php echo html_entity_decode($choices_val); ?></label>
                         </div>
 
                       <?php
@@ -286,7 +286,7 @@
                       ?>
                         <div class="custom-control custom-checkbox wrong_answer">
                           <input type="checkbox" class="custom-control-input" id="question_<?php echo xss_clean($question_data['id']); ?>" <?php echo xss_clean($checked); ?> <?php echo xss_clean($wrong_checked); ?> >
-                          <label class="custom-control-label <?php echo xss_clean($text_color); ?>" for="question_<?php echo (xss_clean($question_data['id'])); ?>"> <?php echo htmlspecialchars($choices_val); ?></label>
+                          <label class="custom-control-label <?php echo xss_clean($text_color); ?>" for="question_<?php echo (xss_clean($question_data['id'])); ?>"> <?php echo html_entity_decode($choices_val); ?></label>
                         </div>
                       <?php
                     }
@@ -306,7 +306,7 @@
                       ?>
                         <div class="custom-control custom-checkbox notanswer">
                           <input type="checkbox" class="custom-control-input" id="question_<?php echo xss_clean($question_data['id']); ?>" <?php echo xss_clean($checked); ?> >
-                          <label class="custom-control-label <?php echo xss_clean($text_color); ?>" for="question_<?php echo (xss_clean($question_data['id'])); ?>"> <?php echo htmlspecialchars($choices_val); ?></label>
+                          <label class="custom-control-label <?php echo xss_clean($text_color); ?>" for="question_<?php echo (xss_clean($question_data['id'])); ?>"> <?php echo html_entity_decode($choices_val); ?></label>
                         </div>
                       <?php
                     }

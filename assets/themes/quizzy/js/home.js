@@ -152,11 +152,11 @@
     if (login_user_id == 0 && ad_active_quiz == "") {
       e.preventDefault();
       swal({
-          title: "Enter Your Name",
+          title: "Enter Your Mobile No. (10 Digits)",
           type: "input",
           showCancelButton: true,
           closeOnConfirm: false,
-          inputPlaceholder: "Write Your Name Here",
+          inputPlaceholder: "Write Your Mobile No. (10 Digits)",
           confirm: {
             text: "Proceed",
           },
@@ -164,7 +164,7 @@
         function (inputValue) {
           if (inputValue === false) return false;
           if (inputValue === "") {
-            swal.showInputError("Plz Enter Name First!");
+            swal.showInputError("Plz Enter Mobile No.!");
             return false;
           } else {
             var base_url = $("#main_base_url").val();

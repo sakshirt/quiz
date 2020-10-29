@@ -99,7 +99,7 @@
 				              $l++;
 				        ?>
 				        	<tr>
-				        		<td class="cell100 result-column1 py-2"><?php echo sprintf("%02d", $l); ?>. <?php echo htmlspecialchars($question_data['question']); ?>
+				        		<td class="cell100 result-column1 py-2"><?php echo sprintf("%02d", $l); ?>. <?php echo html_entity_decode($question_data['question']); ?>
 	    						</td>
 	    						<td class="cell100 result-column2"> 
 				                  <?php 
@@ -109,7 +109,7 @@
 				                    foreach ($given_answer_array as $given_answer) 
 				                    {
 				                      ?>
-				                        <li><?php echo htmlspecialchars($given_answer); ?></li>
+				                        <li><?php echo html_entity_decode($given_answer); ?></li>
 				                      <?php
 				                    }
 				                  }
@@ -127,7 +127,7 @@
 				                    foreach ($given_correct_choice as $correct_choice) 
 				                    {
 				                      ?>
-				                        <li><?php echo htmlspecialchars($correct_choice); ?></li>
+				                        <li><?php echo html_entity_decode($correct_choice); ?></li>
 				                      <?php
 				                    }
 				                  }
@@ -206,7 +206,7 @@
         <div class="modal-body">
           <div class="left_content">
             <ul>
-              <strong> <?php echo lang('question'); ?>: &nbsp;</strong><?php echo htmlspecialchars($question_data['question']); ?>
+              <strong> <?php echo lang('question'); ?>: &nbsp;</strong><?php echo html_entity_decode($question_data['question']); ?>
               <ul class="result-exam-question">
                 <?php 
                   $choices_arr = json_decode($question_data['choices']);
@@ -235,7 +235,7 @@
                       ?>
                         <div class="custom-control custom-checkbox right_answer">
                           <input type="checkbox" class="custom-control-input" id="question_<?php echo xss_clean($question_data['id']); ?>" <?php echo xss_clean($checked); ?> >
-                          <label class="custom-control-label <?php echo xss_clean($text_color); ?>" for="question_<?php echo xss_clean($question_data['id']); ?>"> <?php echo  htmlspecialchars($choices_val); ?></label>
+                          <label class="custom-control-label <?php echo xss_clean($text_color); ?>" for="question_<?php echo xss_clean($question_data['id']); ?>"> <?php echo  html_entity_decode($choices_val); ?></label>
                         </div>
 
                       <?php
@@ -267,7 +267,7 @@
                       ?>
                         <div class="custom-control custom-checkbox wrong_answer">
                           <input type="checkbox" class="custom-control-input" id="question_<?php echo xss_clean($question_data['id']); ?>" <?php echo xss_clean($checked); ?> <?php echo xss_clean($wrong_checked); ?> >
-                          <label class="custom-control-label <?php echo xss_clean($text_color); ?>" for="question_<?php echo xss_clean($question_data['id']); ?>"> <?php echo  htmlspecialchars($choices_val); ?></label>
+                          <label class="custom-control-label <?php echo xss_clean($text_color); ?>" for="question_<?php echo xss_clean($question_data['id']); ?>"> <?php echo  html_entity_decode($choices_val); ?></label>
                         </div>
                       <?php
                     }
@@ -287,7 +287,7 @@
                       ?>
                         <div class="custom-control custom-checkbox notanswer">
                           <input type="checkbox" class="custom-control-input" id="question_<?php echo xss_clean($question_data['id']); ?>" <?php echo xss_clean($checked); ?> >
-                          <label class="custom-control-label <?php echo xss_clean($text_color); ?>" for="question_<?php echo xss_clean($question_data['id']); ?>"> <?php echo  htmlspecialchars($choices_val); ?></label>
+                          <label class="custom-control-label <?php echo xss_clean($text_color); ?>" for="question_<?php echo xss_clean($question_data['id']); ?>"> <?php echo  html_entity_decode($choices_val); ?></label>
                         </div>
                       <?php
                     }
@@ -305,7 +305,7 @@
                 <?php if($question_data['solution']) { ?>
                   <li>
                     <label class="result">
-                      <?php echo lang('question_solution'); ?>: <span class="option "> <?php echo htmlspecialchars($question_data['solution']); ?></span>
+                      <?php echo lang('question_solution'); ?>: <span class="option "> <?php echo html_entity_decode($question_data['solution']); ?></span>
                     </label>
                   </li>
                 <?php } ?>

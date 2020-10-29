@@ -101,7 +101,6 @@ class Test_Controller extends Public_Controller {
             $new_quiz_question_data['quiz_id'] = $quiz_question_val_array['quiz_id'];
             $new_quiz_question_data['title'] = $translated_qus_title;
             $new_quiz_question_data['image'] = $quiz_question_val_array['image'];
-            $new_quiz_question_data['choice_images'] = $quiz_question_val_array['choice_images'];
             $new_quiz_question_data['is_multiple'] = $quiz_question_val_array['is_multiple'];
             $new_quiz_question_data['choices'] = $translated_qus_choices;
             $new_quiz_question_data['correct_choice'] = $translated_qus_correct_choice;
@@ -378,7 +377,6 @@ class Test_Controller extends Public_Controller {
                 $question_title = isset($quiz_question_array['title']) ? $quiz_question_array['title'] : NULL;
                 $question_img = isset($quiz_question_array['image']) ? $quiz_question_array['image'] : NULL;
                 $choices = isset($quiz_question_array['choices']) ? $quiz_question_array['choices'] : '[""]';
-                $choice_images = isset($quiz_question_array['choice_images']) ? $quiz_question_array['choice_images'] : '[""]';
                 $correct_choice = isset($quiz_question_array['correct_choice']) ? $quiz_question_array['correct_choice'] : '[""]';
                 
                 $correct_choice = json_decode($correct_choice);
@@ -415,7 +413,6 @@ class Test_Controller extends Public_Controller {
                 $user_questions['given_answer'] = json_encode($answer);
                 $user_questions['is_correct'] = $is_correct;
                 $user_questions['choices'] = $choices;
-                $user_questions['choice_images'] = $choice_images;
                 $user_questions['correct_choice'] = json_encode($correct_choice);
                 
                 $user_questions['timestamp'] = date('Y-m-d H:i:s');

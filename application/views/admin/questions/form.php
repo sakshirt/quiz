@@ -20,9 +20,6 @@
 
       <?php
     }?>
-            <?php
-                $choice_images = json_decode($question_data['choice_images']);
-              ?>
 
     <div class="col-12">      
         <?php echo form_open_multipart('', array('role'=>'form','novalidate'=>'novalidate')); ?>
@@ -91,10 +88,12 @@
           <div class="col-12">
             <div class="after_ticket_section row">
 
-              <div class="col-md-5">
+              <div class="col-md-8">
                 <div class="form-group <?php echo form_error('choices[]') && empty($first_choies) ? ' has-error' : ''; ?> choice_block">
                   <label class="control-label"> <?php echo lang('question_choices'); ?>  <span class="text-danger">*</span></label>
-                  <input type="text" name="choices[0]" id='choices' class="form-control choices" value="<?php echo xss_clean($first_choies); ?>">
+                  <textarea name="choices[0]" id='choices-0' class="form-control choices choices-init" >
+                    <?php echo xss_clean($first_choies); ?>
+                  </textarea>
                   <span class="small form-error"> <?php echo xss_clean($first_choies) ? '' : strip_tags(form_error("choices[]")); ?> </span>
                 </div>
               </div>
@@ -118,24 +117,6 @@
                     <input type="checkbox" name="is_correct[0]" value="1" class="custom-switch-input is_correct"  <?php echo xss_clean($first_is_checked);  ?>>
                     <span class="custom-switch-indicator"></span>
                   </label>
-                </div>
-              </div>
-
-              <div class="col-3 question_img_block">
-                <div class="form-group <?php echo form_error('image') ? ' has-error' : ''; ?>">
-                  <?php echo  form_label(lang('admin_upload_image'), 'image'); ?>
-                  <?php $choiceImage = isset($choice_images[0]) ? $choice_images[0] : ''; ?>
-                  <input type="File" name="choice_image_0" id="choice_image" class="form-control">
-                  <span class="small form-error"> <?php echo strip_tags(form_error('image')); ?> </span>
-                  <?php 
-                    if($choiceImage)
-                    {
-                  ?>
-                    <img src='<?php echo base_url("assets/images/choices/$choiceImage"); ?>' class="question_image popup">
-
-                  <?php
-                    }
-                  ?>
                 </div>
               </div>
 
@@ -170,10 +151,12 @@
 
                     <div class="copied_ticket_section col-12">
                       <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-8">
                           <div class="form-group <?php echo form_error('choices[]') && empty($choices_value) ? ' has-error' : ''; ?>">
                             <label class="control-label">Options <span class="text-danger">*</span></label>
-                            <input type="text" name="choices[<?php echo xss_clean($i); ?>]" id="choices" class="form-control choices" value="<?php echo xss_clean($choices_value); ?>">
+                            <textarea name="choices[<?php echo xss_clean($i); ?>]" id="choices-<?php echo xss_clean($i); ?>" class="form-control choices choices-init">
+                                <?php echo xss_clean($choices_value); ?>
+                            </textarea>
                             <span class="small form-error"> <?php echo xss_clean($choices_value) ? '' : strip_tags(form_error("choices[]")); ?> </span>
                           </div>
                         </div>
@@ -185,23 +168,6 @@
                               <input type="checkbox" name="is_correct[<?php echo xss_clean($i); ?>]" value="1" class="custom-switch-input is_correct"  <?php echo xss_clean($is_checked);  ?>>
                               <span class="custom-switch-indicator"></span>
                             </label>
-                          </div>
-                        </div>
-                        <div class="col-3 question_img_block">
-                          <div class="form-group <?php echo form_error('image') ? ' has-error' : ''; ?>">
-                            <?php echo  form_label(lang('admin_upload_image'), 'image'); ?>
-                            <?php $choiceImage = isset($choice_images[$i]) ? $choice_images[$i] : ''; ?>
-                            <input type="File" name="choice_image_<?php echo xss_clean($i); ?>" id="choice_image" class="form-control">
-                            <span class="small form-error"> <?php echo strip_tags(form_error('image')); ?> </span>
-                            <?php 
-                              if($choiceImage)
-                              {
-                            ?>
-                              <img src='<?php echo base_url("assets/images/choices/$choiceImage"); ?>' class="question_image popup">
-
-                            <?php
-                              }
-                            ?>
                           </div>
                         </div>
                         <div class="col-md-2">
@@ -236,11 +202,10 @@
       <section class="copy_ticket_section d-none">
         <div class="copied_ticket_section col-12">
           <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-8">
               <div class="form-group choice_block">
                 <label class="control-label"><?php echo lang('question_choices'); ?> <span class="text-danger">*</span></label>
-                <input type="text" name="choices[]" id='choices' class="form-control choices checkkk">
-
+                <textarea name="choices[]" id='choices' class="form-control choices checkkk"></textarea>
               </div>
             </div>
 
@@ -252,13 +217,6 @@
                   <span class="custom-switch-indicator"></span>
                 </label>
               </div>
-            </div>
-            <div class="col-3">
-                <div class="form-group <?php echo form_error('image') ? ' has-error' : ''; ?>">
-                  <?php echo  form_label(lang('admin_upload_image'), 'image'); ?>
-                  <input type="File" name="choice_image[]" id="choice_image" class="form-control">
-                  <span class="small form-error"> <?php echo strip_tags(form_error('image')); ?> </span>
-                </div>
             </div>
             <div class="col-md-2">
               <div class="form-group mt-4 pt-2 ">
