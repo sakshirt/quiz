@@ -219,13 +219,13 @@
 		                  <?php foreach ($featured_image_array as  $featured_image_name) { ?>
 		                    <div class="col-1">
 		                      <img class="img-thumbnail popup" src="<?php echo  base_url('assets/images/quiz')?>/<?php echo xss_clean($featured_image_name)?>">
-		                      <a href="/javascript:void(0)" class="btn btn-link p-0 delete_featured_image" data-image_name = "<?php echo xss_clean($featured_image_name)?>" data-quiz_id="<?php echo xss_clean($quiz_data['id'])?>"><?php echo lang('delete'); ?></a>
+		                      <a href="/javascript:void(0)" class="btn btn-link p-0 delete_featured_image" data-image_name = "<?php echo xss_clean($featured_image_name)?>" data-quiz_id="<?php echo xss_clean($quiz_data['id'])?>" style="float: right;position: absolute;"><i class="fas fa-trash"></i><?php echo lang('delete'); ?></a>
 		                    </div>
 		                  <?php } ?>
 		                </div>
 		              <?php } ?>
 		            </div>
-		            <div class="featured_image_block">
+		            <div class="featured_image_block">	
 		            </div>
 		          </div>
 
